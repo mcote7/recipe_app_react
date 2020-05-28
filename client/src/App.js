@@ -12,7 +12,6 @@ function App() {
       <Router>
         <Main path='/'/>
         <Fridge path='/fridge'/>
-        {/* search results */}
       </Router>
     </div>
   );

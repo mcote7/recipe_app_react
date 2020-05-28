@@ -12,6 +12,7 @@ const [loaded, setLoaded] = useState(false);
 // const [searchLoading, setSearchLoading] = useState(false);
 const [searchResult, setSearchResult] = useState("");
 const [searchErrors, setSearchErrors] = useState("");
+const [page, setPage] = useState(1);
 
 useEffect(() => {
     getIngredients();
@@ -21,6 +22,7 @@ const getIngredients = ()=> {
     axios.get('http://localhost:8000/api/ingredients')
         .then(res=>{
             setIngredients(res.data);
+            // setPage(1);
             setLoaded(true);
             setErrors(null);
             console.log(res.data);
@@ -64,13 +66,13 @@ const deleteAllIngredients = () => {
     })
 }
 // ------------------------------------------------------------------<<<<<
-// axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=onions,garlic,pepper,corn&p=1')
+
 const ingredientNames = ingredients.map(i => i.name);
 // console.log("here:");
 // console.log(ingredientNames);
 
 const searchRecipies = () => {
-    axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p=1')
+    axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
     .then(res => {
     // setSearchLoading(true);
     console.log(res.data.results);
@@ -85,6 +87,15 @@ const searchRecipies = () => {
     displayResults();
 }
 
+const nextPage = () => {
+    setPage(page + 1);
+    searchRecipies();
+}
+
+const prevPage = () => {
+    setPage(page - 1);
+    searchRecipies();
+}
 // -----------------------------------------------------------------<<<<<
 const displayResults = () => {
 
@@ -112,6 +123,12 @@ const displayResults = () => {
                             </tr>})}
                 </tbody>
             </table>
+        </div>
+        <br/>
+        <div className="row pageturner">
+            <button onClick={(e)=>{prevPage()}}>back</button>
+                <p>PAGE#{page}</p>
+            <button onClick={(e)=>{nextPage()}}>more</button>
         </div>
         </>
         );

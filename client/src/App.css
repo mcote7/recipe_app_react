@@ -89,3 +89,6 @@ tr:nth-child(odd) {
   background-color: white;
 }
 /* ---------------------------- */
+.pageturner {
+  width: 100%;
+}
