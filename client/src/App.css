@@ -64,3 +64,28 @@
 
 }
 /* ----------------------------- */
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border-radius: 24px;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 50px;
+  text-align: center;
+}
+thead {
+  background-color: #a8bbc4;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+tr:nth-child(odd) {
+  background-color: white;
+}
+/* ---------------------------- */

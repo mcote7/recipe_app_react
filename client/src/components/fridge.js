@@ -64,9 +64,13 @@ const deleteAllIngredients = () => {
     })
 }
 // ------------------------------------------------------------------<<<<<
+// axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=onions,garlic,pepper,corn&p=1')
+const ingredientNames = ingredients.map(i => i.name);
+// console.log("here:");
+// console.log(ingredientNames);
 
 const searchRecipies = () => {
-    axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=onions,garlic,pepper,corn&p=1')
+    axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p=1')
     .then(res => {
     // setSearchLoading(true);
     console.log(res.data.results);
@@ -99,14 +103,12 @@ const displayResults = () => {
                 <thead>
                     <th>Recipe :</th>
                     <th>Ingredients :</th>
-                    <th>See Full :</th>
                 </thead>
                 <tbody>
                 {searchResult.map((item, index) => {
                     return <tr key={index}>
-                                <td>{item.title}</td>
+                                <td><a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
                                 <td>{item.ingredients}</td>
-                                <td><a href={item.href} target="_blank" rel="noopener noreferrer">{item.href}</a></td>
                             </tr>})}
                 </tbody>
             </table>
@@ -115,7 +117,6 @@ const displayResults = () => {
         );
     }
 }
-
 // -----------------------------------------------------------------<<<<<
     return(
         <>
