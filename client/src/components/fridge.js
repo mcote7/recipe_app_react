@@ -86,7 +86,7 @@ const displayResults = () => {
 
     if(searchErrors) {
         return(
-            <h1 style={{color: "red"}}>&bull;your ingredients do not match any recipies . . .</h1>
+            <h1 style={{color: "red"}}>&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
         );
     }
     else if(searchResult.length > 0 && !searchErrors) {
@@ -102,7 +102,7 @@ const displayResults = () => {
                     <th>See Full :</th>
                 </thead>
                 <tbody>
-                {searchResult.length > 0 && searchResult.map((item, index) => {
+                {searchResult.map((item, index) => {
                     return <tr key={index}>
                                 <td>{item.title}</td>
                                 <td>{item.ingredients}</td>
