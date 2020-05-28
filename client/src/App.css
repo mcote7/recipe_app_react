@@ -1,38 +1,66 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bgimage {
+  background-image: url('./logo192.png');
+  filter: blur(5px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* react color = rgb(0, 216, 255) */
+.row {
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  text-align: center;
+  margin: 10px;
+  padding: 10px;
+}
+.col {
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+}
+/* ------------------------------ */
+.fridge-main {
+  border: solid;
+  background-color: skyblue;
+  height: 90vh;
+  width: 40vw;
+}
+.fridge-freezer {
+  display: block;
+  border: solid;
+  height: 30%;
+}
+.fridge-cooler {
+  display: block;
+  border: solid;
+  height: 60%;
+}
+.fridge-handle {
+  float: right;
+}
+/* ----------------------------- */
+.freezer-inner {
+  background-color: black;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.cooler-inner {
+  overflow: auto;
+  background-color: black;
+  color: white;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.ingredients {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: solid;
 }
+.fridge-bottom {
+
+}
+/* ----------------------------- */

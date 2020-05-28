@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 const ingredientSchema = new mongoose.Schema({
 
@@ -13,11 +14,11 @@ const ingredientSchema = new mongoose.Schema({
             "ingredient is required . . ."
         ],
         unique: [
-            true,
-            "you already have this ingredient . . ."
+            true
         ]
     }
 
 }, { timestamps: true });
 
+ingredientSchema.plugin(uniqueValidator, { message: "we already have this ingredient . . ."});
 module.exports.ingredient = mongoose.model('ingredient', ingredientSchema);
