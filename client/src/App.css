@@ -472,8 +472,8 @@ tr:nth-child(odd) {
 }
 .recipe-href:hover {
   display: inline-block;
-  transform: scale(1.2);
-  transition: transform 0.5s;
+  transform: scale(1.1);
+  transition: transform 1.5s;
   color: rgb(0, 175, 206);
 }
 .recipe-href {

@@ -73,13 +73,12 @@ const searchRecipies = () => {
     setSearchLoading(true);
     axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
     .then(res => {
-        setSearchErrors("");
-        console.log(res.data.results);
-        setSearchLoading(false);
+        console.log("results:"+res.data.results)
+        setSearchLoading(false)
         setSearchResult(res.data.results)})
     .catch(err=>{
-        console.log(err);
         const errorResponse = err;
+        console.log(`errors ${err.response.data.errors}`);
         setSearchErrors(errorResponse);
         })
     setName("");
@@ -96,7 +95,7 @@ const prevPage = () => {
     setPage(page - 1);
     searchRecipies();
 }
-// -----------------------------------------------------------------<<<<<
+// ------------------------<<<--just returns display-------------------------------------<<<<<
 const displayResults = () => {
 
     if(searchLoading) {
@@ -106,7 +105,7 @@ const displayResults = () => {
     }
     else if(searchErrors) {
         return(
-            <h1 className="loading">&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
+            <h1 className="errormess">&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
         );
     }
     else if(searchResult.length > 0 && !searchErrors) {
@@ -132,7 +131,7 @@ const displayResults = () => {
                 {searchResult.map((item, index) => {
                     
                     const ingredArray = item.ingredients.split(",");
-                    let ingredientsInFridge = "";
+                    let ingredientsInFridge = "  none";
                     let ingredientsNotInFridge = "";
                     let ingreds = [];
                     
@@ -162,7 +161,8 @@ const displayResults = () => {
                                     }
                                     return(console.log("done"));
                                 })}
-                                <td><span className="have">&nbsp;&nbsp;HAVE :</span><span>{ingredientsInFridge}</span><span className="need">&nbsp;&nbsp;NEED :</span>
+                                <td><span className="have">&nbsp;&nbsp;HAVE :&nbsp;</span><span>{ingredientsInFridge}</span>
+                                <span>.</span>&nbsp;&nbsp;<span className="need">&nbsp;&nbsp;NEED :&nbsp;</span>
                                 <span style={{color: "red"}}>{ingredientsNotInFridge}&nbsp;ect.</span></td>
                             </tr>})}
                 </tbody>
@@ -207,7 +207,7 @@ const displayResults = () => {
 
                 <div className="fridge-bottom">
                     <button className="bottombtns btn-left" onClick={(e)=>{searchRecipies()}}>
-                        &#9786;&nbsp;search&nbsp;&nbsp;recipies&nbsp;&#9786;</button>
+                        &nbsp;&nbsp;search&nbsp;&nbsp;recipies&nbsp;&#9786;</button>
                     <button className="bottombtns btn-right" onClick={(e)=>{deleteAllIngredients()}}>remove all</button>
                 </div>
 
