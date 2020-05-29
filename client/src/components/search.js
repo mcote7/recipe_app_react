@@ -23,7 +23,6 @@ const getIngredients = ()=> {
         .then(res=>{
             setIngredients(res.data);
             setLoaded(true);
-            setErrors(null);
             console.log(res.data);
         });
 }
@@ -67,7 +66,7 @@ const deleteAllIngredients = () => {
 // ------------------------------------------------------------------<<<<<
 
 const ingredientNames = ingredients.map(i => i.name);
-console.log(`ingreds: ${ingredientNames}`);
+// console.log(`ingreds: ${ingredientNames}`);
 
 const searchRecipies = () => {
     setSearchLoading(true);
@@ -88,6 +87,7 @@ const searchRecipies = () => {
 
 const nextPage = () => {
     setPage(page + 1);
+    console.log(`page: ${page}`);
     searchRecipies();
 }
 
@@ -131,11 +131,12 @@ const displayResults = () => {
                 {searchResult.map((item, index) => {
                     
                     const ingredArray = item.ingredients.split(",");
-                    let ingredientsInFridge = "  none";
+                    let ingredientsInFridge = "";
                     let ingredientsNotInFridge = "";
                     let ingreds = [];
                     
                     ingredArray.forEach(i => {
+                        
                         const ingred = {
                             name: i.substr(1),
                             inFridge: false
@@ -152,7 +153,7 @@ const displayResults = () => {
                     return <tr key={index}>
                                 <td><a className="recipe-href" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
                                 {ingreds.map(x => {
-                                    console.log(x.inFridge + " " + index);
+                                    // console.log(x.inFridge + " " + index);
                                     if(!x.inFridge) {
                                         ingredientsNotInFridge += "  " + x.name + ",";
                                     }
@@ -162,7 +163,7 @@ const displayResults = () => {
                                     return(console.log("done"));
                                 })}
                                 <td><span className="have">&nbsp;&nbsp;HAVE :&nbsp;</span><span>{ingredientsInFridge}</span>
-                                <span>.</span>&nbsp;&nbsp;<span className="need">&nbsp;&nbsp;NEED :&nbsp;</span>
+                                <span>&nbsp;</span>&nbsp;&nbsp;<span className="need">&nbsp;&nbsp;NEED :&nbsp;</span>
                                 <span style={{color: "red"}}>{ingredientsNotInFridge}&nbsp;ect.</span></td>
                             </tr>})}
                 </tbody>
