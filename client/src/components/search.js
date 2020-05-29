@@ -136,12 +136,21 @@ const displayResults = () => {
                     let ingreds = [];
                     
                     ingredArray.forEach(i => {
-                        
-                        const ingred = {
-                            name: i.substr(1),
-                            inFridge: false
+                        let z = 0;
+                        if(i[z].includes(" ")) {// what if middle
+                            const ingred = {
+                                name: i.substr(1),
+                                inFridge: false
+                            }
+                            ingreds.push(ingred);
                         }
-                    ingreds.push(ingred);
+                        else if(!i[z].includes(" ")) {
+                            const ingred = {
+                                name: i,
+                                inFridge: false
+                            }
+                            ingreds.push(ingred);
+                        }
                     })
                     ingreds.forEach( i => {
                     ingredientNames.forEach(x => {
