@@ -1,15 +1,19 @@
 .App {
   text-align: center;
 }
-.bgimage {
+.react {
+  box-shadow: inset 0 0 10px rgb(0, 0, 0, 0.7);
+  background-color: rgb(0, 163, 192);
   background-image: url('./logo192.png');
-  filter: blur(3px);
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: 42px;
+  border-radius: 6px;
+  filter: blur(0px);
+  position: relative;
+  width: 43px;
+  height: 42px;
+  top: 89%;
+  left: -3px;
 }
 .bgcolor {
   background: no-repeat, linear-gradient(to bottom, rgb(15, 15, 25) 55%, rgb(69, 69, 133) 100%);
@@ -18,7 +22,20 @@
   height: 100%;
   top: 0;
   left: 0;
-  z-index: -2;
+  z-index: -3;
+}
+.circle {
+  position: fixed;
+  background-color: rgb(252, 125, 178, 0.2);
+  filter: blur(10px);
+  border-radius: 100%;
+  width: 650px;
+  height: 650px;
+  top: 50%;
+  left: 50%;
+  margin-top: -325px; /* Negative half of height. */
+  margin-left: -325px; /* Negative half of width. */
+  z-index: -1;
 }
 /* react color = rgb(0, 216, 255) */
 .row {
@@ -44,7 +61,7 @@
   border: double 8px transparent;
   border-radius: 90px;
   background-image: linear-gradient(to bottom, rgb(0, 0, 0) 55%, rgb(0, 0, 0) 145%), 
-                    linear-gradient(to right, #fc7db2, #f88e6d);
+                    linear-gradient(to right, rgb(252, 125, 178), #f88e6d);
   background-origin: border-box;
   background-clip: content-box, border-box;
   transition: transform 0.5s;
@@ -60,7 +77,6 @@
   font-size: 6em;
   font-family: magneto;
   font-style: italic;
-  text-decoration: underline;
 }
 .btntitle:hover {
   background-image: -webkit-linear-gradient(left, cornsilk, rgb(0, 216, 255));
@@ -69,7 +85,6 @@
   font-size: 6em;
   font-family: magneto;
   font-style: italic;
-  text-decoration: underline;
 }
 .time {
   background-image: -webkit-linear-gradient(left, #fc7db2, #f88e6d);
@@ -135,27 +150,150 @@
 }
 .fridge-main {
   border: solid;
+  border-radius: 12px;
   background-color: rgb(0, 216, 255);
   height: 90vh;
-  width: 40vw;
+  width: 30vw;
+  box-shadow:  inset 0 0 24px #000000;
 }
 .fridge-freezer {
   display: block;
-  border: solid;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  box-shadow:  inset 0 0 10px #000000;
+  border-radius: 8px;
   height: 30%;
 }
 .fridge-cooler {
   display: block;
-  border: solid;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  box-shadow:  inset 0 0 10px #000000;
+  border-radius: 8px;
   height: 60%;
 }
+.fridge-btm {
+  display: block;
+  border: 1px solid rgb(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 10px #000000;
+  border-radius: 8px;
+  height: 5%;
+  margin: 3px;
+  letter-spacing: 3px;
+}
+.btmlines {
+  color: rgb(0, 0, 0, 0.2);
+}
+/* -------------------------------- */
 .fridge-handle {
   float: right;
+  margin-top: 7px;
+  margin-right: 7px;
+  width: 17vw;
+  height: 5vh;
+  border-radius: 24px;
+  border: solid rgb(255, 248, 220, 0.2);
+  box-shadow: 0px 0px 8px black;
+  background-image: radial-gradient(rgb(192,192,192), rgb(100, 100, 100),rgb(192,192,192));
 }
+.fridge-handle:hover {
+  background-image: radial-gradient(rgb(100, 100, 100), rgb(192,192,192),rgb(100, 100, 100));
+}
+.fridge-handle:focus {
+  transform: scale(1.05);
+  outline: none;
+}
+.handletext {
+  background-image: radial-gradient(rgb(240, 233, 206, 0.2), cornsilk,rgb(252, 245, 221, 0.2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.4em;
+  font-weight: bolder;
+  font-family: magneto;
+  font-style: italic;
+  line-height: 25px;
+  letter-spacing: 1.5px;
+}
+.handletext:hover {
+  background-image: radial-gradient(rgb(245, 241, 226), cornsilk,rgb(216, 212, 195));
+}
+.freezer-handle {
+  float: right;
+  position: relative;
+  top: 71px;
+  margin-right: 7px;
+  width: 10vw;
+  height: 2vh;
+  border-radius: 24px;
+  border: solid rgb(255, 248, 220, 0.2);
+  box-shadow: 0px 0px 8px black;
+  background-image: radial-gradient(rgb(192,192,192), rgb(100, 100, 100),rgb(192,192,192));
+}
+.freezer-handle:hover {
+  background-image: radial-gradient(rgb(100, 100, 100), rgb(192,192,192),rgb(100, 100, 100));
+}
+.freezer-handle:focus {
+  outline: none;
+}
+/* -------------------------------- */
+.notetext {
+  font-family: "Reenie Beanie";
+  font-weight: bolder;
+  font-size: 0.85em;
+  letter-spacing: 2px;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: -1px;
+  line-height: 12px;
+  position: relative;
+  top: -10px;
+}
+.note {
+  -webkit-transform:rotate(-24deg);
+  -o-transform:rotate(-24deg);
+  -moz-transform:rotate(-24deg);
+  position:relative;
+  top: 50px;
+  left: 45px;
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  height:5em;
+  width:5em;
+  padding:1em;
+  -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -moz-transition:-moz-transform .30s linear;
+  -o-transition:-o-transform .30s linear;
+  -webkit-transition:-webkit-transform .30s linear;
+}
+.note:hover {
+  -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  -webkit-transform: scale(2.25);
+  -moz-transform: scale(2.25);
+  -o-transform: scale(2.25);
+  position:relative;
+  z-index:5;
+}
+
 /* ----------------------------- */
 .freezer-inner {
   background-color: black;
   color: white;
+}
+.search-form {
+  border: 1px solid cornsilk;
+  border-radius: 36px;
+  margin-top: 4px;
+  padding: 5px;
+}
+.search-results {
+  border: 1px solid cornsilk;
+  border-radius: 36px;
+  margin-top: 4px;
+  padding: 5px;
 }
 .cooler-inner {
   overflow: auto;

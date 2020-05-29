@@ -7,17 +7,24 @@ const goInside = () => {
 const fridge = () => {
     return(
     <>
-<div className="bgimage"></div>
 <div className="bgcolor"></div>
     <div className="row">
         <div className="col door">
+            <div className="circle"></div>
             <div className="fridge-main">
                 <div className="row fridge-freezer">
-                    <p>check your fridge</p>
-                    <p>search for recipies</p>
+                    <div className="note">
+                        <p className="notetext">check your fridge</p>
+                        <p className="notetext">search for recipies</p>
+                    </div>
+                    <button className="freezer-handle"></button>
                 </div>
                 <div className="row fridge-cooler">
-                    <button className="fridge-handle" onClick={goInside}>open fridge</button>
+                    <button className="fridge-handle" onClick={goInside}><p className="handletext">open fridge</p></button>
+                    <div className="react"></div>
+                </div>
+                <div className="fridge-btm">
+                    <p className="btmlines">||||||||||||||||||||||||||||||||||||||||||||||||||||||</p>
                 </div>
             </div>
         </div>

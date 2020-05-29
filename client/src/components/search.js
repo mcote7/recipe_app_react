@@ -173,29 +173,33 @@ const displayResults = () => {
 // -----------------------------------------------------------------<<<<<
     return(
         <>
-<div className="bgimage"></div>
 <div className="bgcolor"></div>
     <div className="row">
         <div className="col door">
+        <div className="circle"></div>
             <div className="fridge-main">
 
                 <div className="row fridge-freezer freezer-inner">
-                    <p>add ingredients</p>
-                    <form onSubmit={createIngredient}>
-                        <label>ingredient:</label>
-                        <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/><br/>
-                        {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span style={{color:'red'}} key={index}>{err}</span>)}<br/>
-                        <button className="submitbtn" type="submit">add</button>
-                    </form>
+                    <div className="search-form">
+                        <p>add ingredients</p>
+                        <form onSubmit={createIngredient}>
+                            <label>ingredient:</label>
+                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/><br/>
+                            {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span style={{color:'red'}} key={index}>{err}</span>)}<br/>
+                            <button className="submitbtn" type="submit">add</button>
+                        </form>
+                    </div>
                 </div>
 
                 <div className="row fridge-cooler cooler-inner">
+                    <div className="search-results">
                     {loaded && ingredients.map((ingredient, idx)=>{
                         return <div className="ingredients" key={idx}>
                             <p>{ingredient.name}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button className="delbtn" onClick={(e)=>{deleteOneIngredient(ingredient._id)}}>remove</button>
                         </div>
                     })}
+                    </div>
                 </div>
 
                 <div className="fridge-bottom">
