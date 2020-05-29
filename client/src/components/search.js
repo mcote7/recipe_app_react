@@ -67,6 +67,7 @@ const deleteAllIngredients = () => {
 // ------------------------------------------------------------------<<<<<
 
 const ingredientNames = ingredients.map(i => i.name);
+console.log(`ingreds: ${ingredientNames}`);
 
 const searchRecipies = () => {
     setSearchLoading(true);
@@ -100,12 +101,12 @@ const displayResults = () => {
 
     if(searchLoading) {
         return(
-            <p>Lodaing . . .</p>
+            <h1 className="loading">&nbsp;&hearts;&nbsp;Loading . . .</h1>
         );
     }
     else if(searchErrors) {
         return(
-            <h1 style={{color: "red"}}>&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
+            <h1 className="loading">&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
         );
     }
     else if(searchResult.length > 0 && !searchErrors) {
@@ -113,9 +114,11 @@ const displayResults = () => {
             <>
     <div className="col">
         <div className="row pageturner">
-            <button className="navbtns" onClick={(e)=>{prevPage()}}>&#8920;back</button>
-                <p>your search results</p>
-            <button className="navbtns" onClick={(e)=>{nextPage()}}>more&#8921;</button>
+            <div className="turn">
+                <button className="navbtns" onClick={(e)=>{prevPage()}}>&#8920;back</button>
+                    <p className="psearch">&nbsp;&bull;&nbsp;your search results&nbsp;&bull;&nbsp;</p>
+                <button className="navbtns" onClick={(e)=>{nextPage()}}>more&#8921;</button>
+            </div>
         </div>
         <div className="row">
             <table>
@@ -148,7 +151,7 @@ const displayResults = () => {
                     })
                     })
                     return <tr key={index}>
-                                <td><a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
+                                <td><a className="recipe-href" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
                                 {ingreds.map(x => {
                                     console.log(x.inFridge + " " + index);
                                     if(!x.inFridge) {
@@ -159,7 +162,7 @@ const displayResults = () => {
                                     }
                                     return(console.log("done"));
                                 })}
-                                <td><span>{ingredientsInFridge}</span><span style={{color: "blue"}}>&nbsp;&nbsp;need :</span>
+                                <td><span className="have">&nbsp;&nbsp;HAVE :</span><span>{ingredientsInFridge}</span><span className="need">&nbsp;&nbsp;NEED :</span>
                                 <span style={{color: "red"}}>{ingredientsNotInFridge}&nbsp;ect.</span></td>
                             </tr>})}
                 </tbody>
@@ -181,12 +184,12 @@ const displayResults = () => {
 
                 <div className="row fridge-freezer freezer-inner">
                     <div className="search-form">
-                        <p>add ingredients</p>
+                        <p className="search-title">add ingredients</p>
                         <form onSubmit={createIngredient}>
-                            <label>ingredient:</label>
-                            <input type="text" value={name} onChange={(e)=>setName(e.target.value)}/><br/>
-                            {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span style={{color:'red'}} key={index}>{err}</span>)}<br/>
-                            <button className="submitbtn" type="submit">add</button>
+                            <label className="label">ingredient :&nbsp;&nbsp;</label>
+                            <input spellCheck="false" autoFocus="true" className="input" type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
+                            &nbsp;&nbsp;<button className="submitbtn" type="submit">add</button><br/>
+                            {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span className="form-error" key={index}>{err}</span>)}<br/>
                         </form>
                     </div>
                 </div>
@@ -195,7 +198,7 @@ const displayResults = () => {
                     <div className="search-results">
                     {loaded && ingredients.map((ingredient, idx)=>{
                         return <div className="ingredients" key={idx}>
-                            <p>{ingredient.name}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <p className="ingredientname">{ingredient.name}</p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button className="delbtn" onClick={(e)=>{deleteOneIngredient(ingredient._id)}}>remove</button>
                         </div>
                     })}
@@ -203,8 +206,9 @@ const displayResults = () => {
                 </div>
 
                 <div className="fridge-bottom">
-                    <button className="searchbutton" onClick={(e)=>{searchRecipies()}}>search recipies</button>
-                    <button className="delallbtn" onClick={(e)=>{deleteAllIngredients()}}>remove all</button>
+                    <button className="bottombtns btn-left" onClick={(e)=>{searchRecipies()}}>
+                        &#9786;&nbsp;search&nbsp;&nbsp;recipies&nbsp;&#9786;</button>
+                    <button className="bottombtns btn-right" onClick={(e)=>{deleteAllIngredients()}}>remove all</button>
                 </div>
 
             </div>
