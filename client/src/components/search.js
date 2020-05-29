@@ -13,6 +13,8 @@ const [searchLoading, setSearchLoading] = useState(false);
 const [searchResult, setSearchResult] = useState("");
 const [searchErrors, setSearchErrors] = useState("");
 const [page, setPage] = useState(1);
+// const [nextp, setNextp] = useState(false);
+// const [prevp, setPrevp] = useState(false);
 
 useEffect(() => {
     getIngredients();
@@ -70,10 +72,13 @@ const ingredientNames = ingredients.map(i => i.name);
 
 const searchRecipies = () => {
     setSearchLoading(true);
+    // pageHandle();
     axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
     .then(res => {
         console.log("results:"+res.data.results)
         setSearchLoading(false)
+        setPage(page + 1);
+        console.log(`page: ${page}`);
         setSearchResult(res.data.results)})
     .catch(err=>{
         const errorResponse = err;
@@ -84,7 +89,6 @@ const searchRecipies = () => {
     setErrors("");
     displayResults();
 }
-
 const nextPage = () => {
     setPage(page + 1);
     console.log(`page: ${page}`);
@@ -95,6 +99,27 @@ const prevPage = () => {
     setPage(page - 1);
     searchRecipies();
 }
+// ------------------------------|||
+// const pageHandle = () => {
+//     if(nextp) {
+//         setPage(page + 1);
+//         searchRecipies();
+//     }
+//     else if(prevp) {
+//         setPage(page - 1);
+//         searchRecipies();
+//     }
+// }
+// const nextPage = () => {
+//     setNextp(true);
+//     console.log(`next: ${nextp}`)
+//     console.log(`page: ${page}`);
+//     pageHandle();
+// }
+// const prevPage = () => {
+//     setPrevp(true);
+//     pageHandle();
+// }
 // ------------------------<<<--just returns display-------------------------------------<<<<<
 const displayResults = () => {
 
@@ -105,7 +130,7 @@ const displayResults = () => {
     }
     else if(searchErrors) {
         return(
-            <h1 className="errormess">&bull;&nbsp;your ingredients do not match any recipies . . .</h1>
+            <h1 className="errormess">&bull;&nbsp;Search invalid please try again . . .</h1>
         );
     }
     else if(searchResult.length > 0 && !searchErrors) {
@@ -162,7 +187,6 @@ const displayResults = () => {
                     return <tr key={index}>
                                 <td><a className="recipe-href" href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a></td>
                                 {ingreds.map(x => {
-                                    // console.log(x.inFridge + " " + index);
                                     if(!x.inFridge) {
                                         ingredientsNotInFridge += "  " + x.name + ",";
                                     }
@@ -173,7 +197,7 @@ const displayResults = () => {
                                 })}
                                 <td><span className="have">&nbsp;&nbsp;HAVE :&nbsp;</span><span>{ingredientsInFridge}</span>
                                 <span>&nbsp;</span>&nbsp;&nbsp;<span className="need">&nbsp;&nbsp;NEED :&nbsp;</span>
-                                <span style={{color: "red"}}>{ingredientsNotInFridge}&nbsp;ect.</span></td>
+                                <span style={{color: "red"}}>{ingredientsNotInFridge}&nbsp;more...</span></td>
                             </tr>})}
                 </tbody>
             </table>
