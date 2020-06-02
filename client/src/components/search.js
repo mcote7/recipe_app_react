@@ -37,6 +37,7 @@ const createIngredient = (e) => {
     .then(res=>{
         getIngredients();
         setName("");
+        setErrors("");
         console.log(res)
     })
     .catch(err=>{
@@ -70,14 +71,21 @@ const deleteAllIngredients = () => {
 const ingredientNames = ingredients.map(i => i.name);
 // console.log(`ingreds: ${ingredientNames}`);
 
+// fetch(`http://api.openweathermap.org/data/2.5/weather?q=${area}&units=metric&APPID=b66ecf3c7e717c4eb45abd13e53ba0ac`,{mode:'cors'})
+// .then((response)=>{
+//     if (response.status !== 200) {
+//     throw new Error("Not 200 response")
+//    } else return (response.json());
+// }).then(do stuff).catch(error => { handle error })
+
 const searchRecipies = () => {
     setSearchLoading(true);
     // pageHandle();
     axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
     .then(res => {
-        console.log("results:"+res.data.results)
+        console.log(`results: ${res.data.results}`)
         setSearchLoading(false)
-        setPage(page + 1);
+        setPage(page + 1);//---------------------------------------------<<<<
         console.log(`page: ${page}`);
         setSearchResult(res.data.results)})
     .catch(err=>{

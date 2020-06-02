@@ -13,7 +13,7 @@ const main = () => {
         <div className="linkwrapper">
             <a className="mynavlinks" href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a className="mynavlinks" href="/">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a className="mynavlinks" href="/">Locations</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a className="mynavlinks" href="/">About</a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <Particles
             params={{
