@@ -332,8 +332,8 @@ const main = () => {
         <button className="mainbtn" onClick={goFridge}><p className="btntitle">Time to eat!</p><Clock/></button>
 
         <a className="mynamelinks" href="/">&nbsp;&copy;&nbsp;2020&nbsp;&nbsp;michael&nbsp;&nbsp;cote 
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        made&nbsp;&nbsp;with&nbsp;&nbsp;react&nbsp;&hearts;</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                made&nbsp;&nbsp;with&nbsp;&nbsp;react&nbsp;&hearts;</a>
         </>
     );
 }

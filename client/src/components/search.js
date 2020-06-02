@@ -12,9 +12,8 @@ const [loaded, setLoaded] = useState(false);
 const [searchLoading, setSearchLoading] = useState(false);
 const [searchResult, setSearchResult] = useState("");
 const [searchErrors, setSearchErrors] = useState("");
-const [page, setPage] = useState(1);
-// const [nextp, setNextp] = useState(false);
-// const [prevp, setPrevp] = useState(false);
+let [page, setPage] = useState(1);
+
 
 useEffect(() => {
     getIngredients();
@@ -50,7 +49,7 @@ const createIngredient = (e) => {
         setErrors(errorArr);
     })
 };
-// ------------------------------------------------------------------<<<<<
+// -------------------------------------------------------------------<<<<<
 const deleteOneIngredient = (ingredientId) => {
     axios.delete('http://localhost:8000/api/ingredient/delete/' + ingredientId)
     .then(res => {
@@ -66,26 +65,19 @@ const deleteAllIngredients = () => {
         console.log(res)
     })
 }
-// ------------------------------------------------------------------<<<<<
+// -------------------------------------------------------------------<<<<<
 
 const ingredientNames = ingredients.map(i => i.name);
+// console.log(`ingreds full: ${ingredients}`);
 // console.log(`ingreds: ${ingredientNames}`);
 
-// fetch(`http://api.openweathermap.org/data/2.5/weather?q=${area}&units=metric&APPID=b66ecf3c7e717c4eb45abd13e53ba0ac`,{mode:'cors'})
-// .then((response)=>{
-//     if (response.status !== 200) {
-//     throw new Error("Not 200 response")
-//    } else return (response.json());
-// }).then(do stuff).catch(error => { handle error })
 
 const searchRecipies = () => {
     setSearchLoading(true);
-    // pageHandle();
     axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
     .then(res => {
         console.log(`results: ${res.data.results}`)
         setSearchLoading(false)
-        setPage(page + 1);//---------------------------------------------<<<<
         console.log(`page: ${page}`);
         setSearchResult(res.data.results)})
     .catch(err=>{
@@ -97,38 +89,17 @@ const searchRecipies = () => {
     setErrors("");
     displayResults();
 }
+
 const nextPage = () => {
-    setPage(page + 1);
-    console.log(`page: ${page}`);
+    setPage(page += 1);
+    searchRecipies();
+}
+const prevPage = () => {
+    setPage(page -= 1);
     searchRecipies();
 }
 
-const prevPage = () => {
-    setPage(page - 1);
-    searchRecipies();
-}
-// ------------------------------|||
-// const pageHandle = () => {
-//     if(nextp) {
-//         setPage(page + 1);
-//         searchRecipies();
-//     }
-//     else if(prevp) {
-//         setPage(page - 1);
-//         searchRecipies();
-//     }
-// }
-// const nextPage = () => {
-//     setNextp(true);
-//     console.log(`next: ${nextp}`)
-//     console.log(`page: ${page}`);
-//     pageHandle();
-// }
-// const prevPage = () => {
-//     setPrevp(true);
-//     pageHandle();
-// }
-// ------------------------<<<--just returns display-------------------------------------<<<<<
+// ------------------------<<<--just returns search results---------------------------<<<<<
 const displayResults = () => {
 
     if(searchLoading) {
@@ -136,7 +107,7 @@ const displayResults = () => {
             <h1 className="loading">&nbsp;&hearts;&nbsp;Loading . . .</h1>
         );
     }
-    else if(searchErrors) {
+    else if(searchErrors) {//------------------------------------------need fix-------<<<<<
         return(
             <h1 className="errormess">&bull;&nbsp;Search invalid please try again . . .</h1>
         );
@@ -148,7 +119,7 @@ const displayResults = () => {
         <div className="row pageturner">
             <div className="turn">
                 <button className="navbtns" onClick={(e)=>{prevPage()}}>&#8920;back</button>
-                    <p className="psearch">&nbsp;&bull;&nbsp;your search results&nbsp;&bull;&nbsp;</p>
+                    <p className="psearch">&nbsp;your search results ( {page} )&nbsp;</p>
                 <button className="navbtns" onClick={(e)=>{nextPage()}}>more&#8921;</button>
             </div>
         </div>
@@ -170,7 +141,7 @@ const displayResults = () => {
                     
                     ingredArray.forEach(i => {
                         let z = 0;
-                        if(i[z].includes(" ")) {// what if middle
+                        if(i[z].includes(" ")) {
                             const ingred = {
                                 name: i.substr(1),
                                 inFridge: false
@@ -229,7 +200,7 @@ const displayResults = () => {
                         <p className="search-title">add ingredients</p>
                         <form onSubmit={createIngredient}>
                             <label className="label">ingredient :&nbsp;&nbsp;</label>
-                            <input spellCheck="false" autoFocus="true" className="input" type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
+                            <input spellCheck="false" autoFocus={true} className="input" type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
                             &nbsp;&nbsp;<button className="submitbtn" type="submit">add</button><br/>
                             {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span className="form-error" key={index}>{err}</span>)}<br/>
                         </form>
