@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from '@reach/router';
 
 
+
 const OpenFridge = () => {
 
 const [ingredients, setIngredients] = useState([]);
