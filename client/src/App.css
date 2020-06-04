@@ -537,3 +537,6 @@ tr:nth-child(odd) {
   100%{   color: #fc7db2;    }
 }
 /* ---------------------------- */
+.errormess {
+  color: chartreuse;
+}

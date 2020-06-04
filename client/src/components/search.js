@@ -80,12 +80,12 @@ const searchRecipies = () => {
         console.log(`results: ${res.data.results}`)
         setSearchLoading(false)
         console.log(`page: ${page}`);
+        if(res.data.results.length <= 0) {
+            setSearchErrors("i am error")
+        }
         setSearchResult(res.data.results)})
-    .catch(err=>{
-        const errorResponse = err;
-        console.log(`errors ${err.response.data.errors}`);
-        setSearchErrors(errorResponse);
-        })
+    .catch(err => {setSearchErrors("this is error - " + err)})
+    console.log(`hey:`);
     setName("");
     setErrors("");
     displayResults();
@@ -96,8 +96,14 @@ const nextPage = () => {
     searchRecipies();
 }
 const prevPage = () => {
-    setPage(page -= 1);
-    searchRecipies();
+    if(page > 1) {
+        setPage(page -= 1);
+        searchRecipies();
+    }
+    else {
+        searchRecipies();
+    }
+    
 }
 
 // ------------------------<<<--just returns search results---------------------------<<<<<
