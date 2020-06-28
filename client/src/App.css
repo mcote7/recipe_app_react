@@ -114,6 +114,7 @@
   color: #f88e6d;
   letter-spacing: 1em;
   padding: 10px;
+  transition: 1.5s;
 }
 .mynamelinks:hover {
   border: solid 1px rgb(0, 0, 0, 0.1);
@@ -136,6 +137,7 @@
   font-weight: lighter;
   display: inline-block;
   color: #f88e6d;
+  transition: 0.5s;
 }
 .mynavlinks:hover {
   display: inline-block;
