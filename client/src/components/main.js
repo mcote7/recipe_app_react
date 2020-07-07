@@ -2,6 +2,7 @@ import React from 'react';
 import { navigate } from '@reach/router';
 import Particles from 'react-particles-js';
 import Clock from './clock';
+import Time from './timeDisplay';
 
 
 const goFridge = () => {
@@ -10,10 +11,11 @@ const goFridge = () => {
 const main = () => {
     return(
         <>
-        <div className="linkwrapper">
+        <div className="row linkwrapper">
             <a className="mynavlinks" href="/">Home</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a className="mynavlinks" href="/">Contact</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a className="mynavlinks" href="/">About</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a className="mynavlinks ml-5" href="/"><Time/></a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <Particles
             params={{
