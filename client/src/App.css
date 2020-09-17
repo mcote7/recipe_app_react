@@ -434,7 +434,7 @@ canvas{
   letter-spacing: 4px;
 }
 .btn-left:hover {
-  transform: scale(2);
+  transform: scale(1);
   transition: transform 0.5s;
 }
 .btn-left:focus {

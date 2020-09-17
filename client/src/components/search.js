@@ -75,7 +75,7 @@ const ingredientNames = ingredients.map(i => i.name);
 
 const searchRecipies = () => {
     setSearchLoading(true);
-    axios.get('https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i='+ingredientNames+'&p='+page)
+    axios.get(`https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?i=${ingredientNames}&p=${page}`)
     .then(res => {
         console.log(`results: ${res.data.results}`)
         setSearchLoading(false)
@@ -207,7 +207,7 @@ const displayResults = () => {
                         <p className="search-title">add ingredients</p>
                         <form onSubmit={createIngredient}>
                             <label className="label">ingredient :&nbsp;&nbsp;</label>
-                            <input spellCheck="false" autoFocus={true} className="input" type="text" value={name} onChange={(e)=>setName(e.target.value)+setErrors('')}/>
+                            <input pattern="^[^\s].+[^\s]$" spellCheck="false" autoFocus={true} className="input" type="text" value={name} onChange={(e)=>setName(e.target.value)+setErrors('')}/>
                             &nbsp;&nbsp;<button className="submitbtn" type="submit">add</button><br/>
                             {errors && errors.filter(err => err.includes("ingredient")).map((err, index) => <span className="form-error" key={index}>{err}</span>)}<br/>
                         </form>
