@@ -25,6 +25,7 @@ const getIngredients = ()=> {
         .then(res=>{
             setIngredients(res.data);
             setLoaded(true);
+            setSearchErrors('');
             console.log(res.data);
         });
 }
@@ -215,6 +216,7 @@ const displayResults = () => {
                 </div>
 
                 <div className="row fridge-cooler cooler-inner">
+                    {ingredients.length > 0 ?
                     <div className="search-results">
                     {loaded && ingredients.map((ingredient, idx)=>{
                         return <div className="ingredients" key={idx}>
@@ -222,7 +224,7 @@ const displayResults = () => {
                             <button className="delbtn" onClick={(e)=>{deleteOneIngredient(ingredient._id)}}>remove</button>
                         </div>
                     })}
-                    </div>
+                    </div>:''}
                 </div>
 
                 <div className="fridge-bottom">
